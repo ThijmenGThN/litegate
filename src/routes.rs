@@ -17,8 +17,16 @@ struct PayReq {
 }
 
 pub fn config(cfg: &mut web::ServiceConfig) {
-    cfg.service(web::resource("/payments").route(web::post().to(create_payment)))
+    cfg.service(web::resource("/health").route(web::get().to(health_check)))
+        .service(web::resource("/payments").route(web::post().to(create_payment)))
         .service(web::resource("/payments/{id}").route(web::get().to(get_payment)));
+}
+
+async fn health_check() -> HttpResponse {
+    HttpResponse::Ok().json(json!({
+        "status": "ok",
+        "timestamp": SystemTime::now().duration_since(UNIX_EPOCH).unwrap().as_secs()
+    }))
 }
 
 async fn create_payment(db: web::Data<Db>, req: web::Json<PayReq>) -> HttpResponse {

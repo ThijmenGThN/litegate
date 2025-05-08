@@ -1,0 +1,28 @@
+# Rust artifacts
+target/
+**/*.rs.bk
+Cargo.lock.orig
+
+# Git files
+.git/
+.gitignore
+
+# Environment and local development files
+.env
+*.db
+*.db-*
+*.log
+
+# IDE files
+.idea/
+.vscode/
+
+# Documentation and assets not needed for building
+assets/
+docs/
+README.md
+
+# Docker files (to avoid recursive copying)
+Dockerfile
+docker-compose.yml
+.dockerignore 
