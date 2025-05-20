@@ -38,6 +38,8 @@ jobs:
       - name: Build binary with cross
         run: |
           export CROSS_NO_WARNINGS=0
+          export OPENSSL_STATIC=1
+          export OPENSSL_DIR=/usr/local/openssl
           curl https://sh.rustup.rs -sSf | sh -s -- -y
           cargo install cross --git https://github.com/cross-rs/cross
           cross build --release --target ${{ matrix.platform.cross }}
